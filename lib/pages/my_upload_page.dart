@@ -18,6 +18,46 @@ class _MyUploadPageState extends State<MyUploadPage> {
       _image = image;
     });
   }
+  _imgFromCamera() async {
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50
+    );
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +77,42 @@ backgroundColor: Colors.white,
           child: Column(
             children: [
               GestureDetector(
-                onTap: (){_imgFromGallery();},
+                onTap: (){
+                  _showPicker(context);
+                  },
                 child: Container(
                   color: Colors.grey.withOpacity(0.4),
                   width:double.infinity,
                   height: MediaQuery.of(context).size.width/1.5,
-                  child: Icon(Icons.add_a_photo,size: 60,),
+                  child:_image==null? Icon(Icons.add_a_photo,size: 60,)
+                      :Stack(
+                    children: [
+                      Image.file(_image,
+                        height: double.infinity,
+                        width: double.infinity,
+                      fit: BoxFit.cover,),
+                      Container(
+                        width: double.infinity,
+                        color: Colors.black12,
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            IconButton(
+                                icon: Icon(Icons.highlight_remove,color: Colors.white,),
+                                onPressed: (){
+                                  setState(() {
+                                    _image=null;
+                                  });
+
+                            }
+                            ),
+
+                          ],
+                        ),
+                      )
+                    ],
+                  )
 
                 ),
               ),
