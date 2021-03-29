@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagclone/pages/home_page.dart';
 import 'package:flutter_instagclone/pages/signup_page.dart';
 class SignInPage extends StatefulWidget {
   static final String id="signin_page";
@@ -11,6 +12,9 @@ class _SignInPageState extends State<SignInPage> {
   var passwordcontroller=TextEditingController();
   _callSignIn(){
     Navigator.pushReplacementNamed(context, SignUpPage.id);
+  }
+  _callHomepage(){
+    Navigator.pushReplacementNamed(context, Homepage.id);
   }
   @override
   Widget build(BuildContext context) {
@@ -78,18 +82,23 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     SizedBox(height: 10,),
                     //button
-                    Container(
-                      height: 50,
+                    GestureDetector(
+                      onTap: (){
+                        _callHomepage();
+                      },
+                      child: Container(
+                        height: 50,
                         padding: EdgeInsets.only(left: 10,right: 10),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.2),
-                            width: 2,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.2),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(7)
                         ),
-                        borderRadius: BorderRadius.circular(7)
-                      ),
-                      child: Center(
-                        child: Text("Sign In",style: TextStyle(color: Colors.white,fontSize: 17),),
+                        child: Center(
+                          child: Text("Sign In",style: TextStyle(color: Colors.white,fontSize: 17),),
+                        ),
                       ),
                     ),
                   ],

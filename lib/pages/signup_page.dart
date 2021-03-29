@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagclone/pages/home_page.dart';
 import 'package:flutter_instagclone/pages/signin_page.dart';
 class SignUpPage extends StatefulWidget {
   static final String id="signup_page";
@@ -13,6 +14,9 @@ class _SignUpPageState extends State<SignUpPage> {
   var cpasswordcontroller=TextEditingController();
   _callSignIn(){
     Navigator.pushReplacementNamed(context, SignInPage.id);
+  }
+  _callHomepage(){
+    Navigator.pushReplacementNamed(context, Homepage.id);
   }
   @override
   Widget build(BuildContext context) {
