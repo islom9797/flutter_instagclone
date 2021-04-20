@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 class MyUploadPage extends StatefulWidget {
   @override
   _MyUploadPageState createState() => _MyUploadPageState();
+  PageController pageController;
+  MyUploadPage({this.pageController});
 }
 
 class _MyUploadPageState extends State<MyUploadPage> {
@@ -68,7 +70,9 @@ backgroundColor: Colors.white,
         actions: [
           IconButton(
               icon: Icon(Icons.post_add,color: Color.fromRGBO(245, 96, 64, 1),),
-              onPressed: (){})
+              onPressed: (){
+                widget.pageController.animateToPage(1,duration: Duration(milliseconds: 200),curve: Curves.easeIn);
+              })
         ],
       ),
       body:SingleChildScrollView(
