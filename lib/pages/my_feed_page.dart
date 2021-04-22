@@ -27,9 +27,9 @@ class _MyFeedPageState extends State<MyFeedPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text("Instagram",style: TextStyle(
-          color: Colors.black,fontFamily: "Billabong",fontSize: 30
-        ),),
+        title: Center(child: Text("Instagram",style: TextStyle(
+          color: Colors.black,fontFamily: "Billabong",fontSize: 30,
+        ),),),
         actions: [
           IconButton(
               icon: Icon(Icons.camera_alt,color: Colors.black,),
