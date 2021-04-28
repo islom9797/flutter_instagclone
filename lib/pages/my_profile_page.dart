@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_instagclone/model/post_model.dart';
+import 'package:flutter_instagclone/services/auth_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 class MyProfilePage extends StatefulWidget {
@@ -11,10 +12,11 @@ class MyProfilePage extends StatefulWidget {
 }
 
 class _MyProfilePageState extends State<MyProfilePage> {
-  File _image;
+  PickedFile _image;
+  final ImagePicker _picker = ImagePicker();
 
   _imgFromGallery() async {
-    File image = await ImagePicker.pickImage(
+    PickedFile image = await _picker.getImage(
         source: ImageSource.gallery, imageQuality: 50
     );
 
@@ -23,7 +25,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     });
   }
   _imgFromCamera() async {
-    File image = await ImagePicker.pickImage(
+    PickedFile image = await _picker.getImage(
         source: ImageSource.camera, imageQuality: 50
     );
 
@@ -83,6 +85,14 @@ class _MyProfilePageState extends State<MyProfilePage> {
         backgroundColor: Colors.white,
         elevation: 0,
         title:Center(child: Text("Profile",style: TextStyle(color: Colors.black87,fontFamily: "Billabong",fontSize: 25),),),
+
+        actions: [
+          IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: (){
+                AuthService.signOutUser(context);
+              }),
+        ],
       ),
       body: Container(
         width: double.infinity,

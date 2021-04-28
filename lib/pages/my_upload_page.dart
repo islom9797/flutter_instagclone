@@ -10,23 +10,24 @@ class MyUploadPage extends StatefulWidget {
 
 class _MyUploadPageState extends State<MyUploadPage> {
   File _image;
+  final ImagePicker _picker = ImagePicker();
 
   _imgFromGallery() async {
-    File image = await ImagePicker.pickImage(
+    PickedFile image = await _picker.getImage(
         source: ImageSource.gallery, imageQuality: 50
     );
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
   _imgFromCamera() async {
-    File image = await ImagePicker.pickImage(
+    PickedFile image = await _picker.getImage(
         source: ImageSource.camera, imageQuality: 50
     );
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
